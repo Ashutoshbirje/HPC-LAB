@@ -20,15 +20,25 @@ int main() {
     }
 
     double start = omp_get_wtime();
+    for (int i = 0; i < n; i++) {
+        result[i] = vec[i] + scalar;
+    }
+    double end = omp_get_wtime();
+    double time = end - start;
+    printf("Time taken: %lf seconds (Sequential) \n", time);
 
+    double start1 = omp_get_wtime();
     #pragma omp parallel for
     for (int i = 0; i < n; i++) {
         result[i] = vec[i] + scalar;
     }
+    double end1 = omp_get_wtime();
+    double time1 = end1 - start1;
+    printf("Time taken: %lf seconds (Parallel) \n", time1);
+    
+    double speedup = time / time1;
+    printf("Speedup: %.3f\n", speedup);
 
-    double end = omp_get_wtime();
-
-    printf("Time taken: %lf seconds\n", end - start);
 
     printf("Sample result: \n");
     for (int i = 0; i < (n < 10 ? n : 10); i++) {

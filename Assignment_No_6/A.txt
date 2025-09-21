@@ -1,0 +1,15 @@
+Option A: Install OpenMPI
+  sudo apt update
+  sudo apt install -y openmpi-bin openmpi-common libopenmpi-dev
+  mpicc --version
+
+Option B: Install MPICH
+  sudo apt update
+  sudo apt install -y mpich
+  mpirun --version
+
+Compilation 
+ mpicc hello.c -o hello
+
+Execution 
+ mpirun --oversubscribe -np <number_of_process> ./01
